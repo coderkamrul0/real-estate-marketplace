@@ -48,7 +48,7 @@ const SingIn = () => {
         </div>
         <div className="mt-4 text-center">
           <p>
-            Already have an account? <Link to={"/sign-up"}>Login</Link>
+            Already have an account? <Link to={"/sign-up"}>Sign up</Link>
           </p>
         </div>
       </form>
