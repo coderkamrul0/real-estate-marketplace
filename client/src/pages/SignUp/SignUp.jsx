@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../../components/Header/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -91,9 +92,7 @@ const SignUp = () => {
           {loading ? "Loading..." : "Sing Up"}
         </button>
         <div className="text-center mt-4">
-          <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-transparent hover:text-black border border-black transition-all focus:outline-none  w-full">
-            Google Login
-          </button>
+          <OAuth/>
         </div>
         <div className="mt-4 text-center">
           <p>
