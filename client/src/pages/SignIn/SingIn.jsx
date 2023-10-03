@@ -1,12 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../../redux/user/userSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const {loading, error} = useSelector((state) => state.user)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -16,7 +22,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch("/server/auth/signin", {
         method: "POST",
         headers: {
@@ -27,16 +33,13 @@ const SignIn = () => {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        dispatch(signInFailure(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      dispatch(signInFailure(error.message))
     }
   };
 
@@ -47,7 +50,7 @@ const SignIn = () => {
         className="bg-white p-8 rounded-lg shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] w-96"
       >
         <h2 className="text-2xl font-semibold mb-4 text-center">Sign In</h2>
-        
+
         <div className="mb-4">
           <input
             type="email"
@@ -70,9 +73,7 @@ const SignIn = () => {
             required
           />
         </div>
-        <div>
-          {error && <small>{error}</small>}
-        </div>
+        <div>{error && <small>{error}</small>}</div>
         <button
           disabled={loading}
           type="submit"
