@@ -7,7 +7,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../../redux/user/userSlice";
-import OAuth from "../../components/Header/OAuth";
+import OAuth from "../../components/Oauth/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
