@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser.avatar);
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -45,6 +44,7 @@ const Header = () => {
                 src={currentUser.avatar}
                 alt="profile"
               />
+              {/* <p>Profile</p> */}
             </Link>
           ) : (
             <Link to={"/sign-in"}>
