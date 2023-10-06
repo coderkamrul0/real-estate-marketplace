@@ -44,7 +44,7 @@ const Header = () => {
                 src={currentUser.avatar}
                 alt="profile"
               />
-              {/* <p>Profile</p> */}
+              
             </Link>
           ) : (
             <Link to={"/sign-in"}>
